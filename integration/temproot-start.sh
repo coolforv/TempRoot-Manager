@@ -2,9 +2,9 @@
 # Run only from GhostLock's already-rooted worker. This hook does not escalate privileges.
 set -eu
 BROKER=/data/local/tmp/trm-broker
-GRANTS=/data/local/tmp/temproot.grants
-LOG=/data/local/tmp/temproot-broker.log
-MANAGER_PACKAGE=com.temproot.manager
+GRANTS=/data/local/tmp/temproot/grants
+LOG=/data/local/tmp/temproot/broker.log
+MANAGER_PACKAGE=com.temproot.manager\nmkdir -p /data/local/tmp/temproot\nchmod 0700 /data/local/tmp/temproot
 [ "$(id -u)" = "0" ] || { echo "not UID 0" >> "$LOG"; exit 1; }
 [ -x "$BROKER" ] || { echo "broker binary missing" >> "$LOG"; exit 1; }
 LINE="$(cmd package list packages -U "$MANAGER_PACKAGE" 2>/dev/null | head -1)"
